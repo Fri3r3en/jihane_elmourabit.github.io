@@ -8,7 +8,7 @@
     <meta name="keywords" content="cybersecurity, GRC, SOC, audit IT, EBIOS, ISO 27001, risk management">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -20,45 +20,38 @@
             theme: {
                 extend: {
                     colors: {
-                        'neon-green': '#39ff14',
-                        'neon-blue': '#00ffff',
-                        'neon-purple': '#bf00ff',
-                        'neon-pink': '#ff00ff',
-                        'terminal-black': '#0a0a0a',
-                        'terminal-gray': '#1a1a1a',
-                        'hacker-dark': '#001100'
+                        'primary-blue': '#0066CC',
+                        'secondary-blue': '#004C99',
+                        'dark-blue': '#003366',
+                        'light-blue': '#E6F2FF',
+                        'accent-blue': '#0099FF',
+                        'text-dark': '#1A1A1A',
+                        'text-light': '#4A4A4A',
+                        'background-light': '#F8FAFC',
+                        'border-light': '#E2E8F0'
                     },
                     fontFamily: {
-                        'fira': ['Fira Code', 'monospace'],
-                        'orbitron': ['Orbitron', 'sans-serif']
+                        'sans': ['Inter', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace']
                     },
                     animation: {
-                        'blink': 'blink 1s step-end infinite',
-                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite alternate',
-                        'typewriter': 'typewriter 4s steps(40) 1s 1 normal both'
+                        'fade-in': 'fadeIn 0.8s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'pulse-soft': 'pulseSoft 2s infinite'
                     },
                     keyframes: {
-                        blink: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        pulseSoft: {
                             '0%, 100%': { opacity: '1' },
-                            '50%': { opacity: '0' }
-                        },
-                        'pulse-glow': {
-                            '0%': { 
-                                'box-shadow': '0 0 5px #39ff14, 0 0 10px #39ff14',
-                                'text-shadow': '0 0 5px #39ff14'
-                            },
-                            '100%': { 
-                                'box-shadow': '0 0 20px #39ff14, 0 0 30px #39ff14, 0 0 40px #39ff14',
-                                'text-shadow': '0 0 10px #39ff14, 0 0 20px #39ff14'
-                            }
-                        },
-                        typewriter: {
-                            'from': { width: '0' },
-                            'to': { width: '100%' }
+                            '50%': { opacity: '0.8' }
                         }
-                    },
-                    backgroundImage: {
-                        'circuit-pattern': "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CiAgPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjMDAxMTAwIj48L3JlY3Q+CiAgPHBhdGggZD0iTTAgMGg0djRIMFYweiIgZmlsbD0iIzAwZmYwMCIgb3BhY2l0eT0iMC4xIj48L3BhdGg+Cjwvc3ZnPg==')",
                     }
                 }
             }
@@ -67,80 +60,75 @@
     
     <style>
         body {
-            background-color: #0a0a0a;
-            color: #e0e0e0;
-            overflow-x: hidden;
-        }
-        
-        .terminal-border {
-            border: 1px solid #39ff14;
-            box-shadow: 0 0 10px #39ff14, inset 0 0 10px rgba(57, 255, 20, 0.1);
-        }
-        
-        .neon-text {
-            text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14;
-        }
-        
-        .neon-text-blue {
-            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
-        }
-        
-        .neon-hover:hover {
-            text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14;
-            color: #39ff14;
+            background-color: #ffffff;
+            color: #1A1A1A;
+            font-family: 'Inter', sans-serif;
         }
         
         .section-title {
             position: relative;
             display: inline-block;
+            margin-bottom: 2rem;
         }
         
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -8px;
             left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, #39ff14, transparent);
+            width: 60px;
+            height: 3px;
+            background: #0066CC;
         }
         
-        .scan-line {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(to bottom, transparent, #39ff14, transparent);
-            z-index: 999;
-            opacity: 0.3;
-            animation: scan-line 3s linear infinite;
-            pointer-events: none;
-        }
-        
-        .hacker-card {
-            background: rgba(0, 17, 0, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(57, 255, 20, 0.3);
+        .card {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
         
-        .hacker-card:hover {
-            border-color: #39ff14;
-            box-shadow: 0 0 15px rgba(57, 255, 20, 0.5);
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 102, 204, 0.1);
             transform: translateY(-5px);
+            border-color: #0066CC;
         }
         
-        .terminal-typing {
-            overflow: hidden;
-            border-right: 2px solid #39ff14;
-            white-space: nowrap;
-            animation: typewriter 4s steps(40) 1s 1 normal both, blink 1s step-end infinite;
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #0066CC;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 20px;
+            bottom: -2rem;
+            width: 2px;
+            background: #E2E8F0;
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
         }
         
         .skill-bar {
             height: 6px;
-            background: rgba(57, 255, 20, 0.2);
+            background: #E2E8F0;
             border-radius: 3px;
             overflow: hidden;
             position: relative;
@@ -148,64 +136,42 @@
         
         .skill-progress {
             height: 100%;
-            background: linear-gradient(90deg, #39ff14, #00ffff);
+            background: #0066CC;
             border-radius: 3px;
             position: relative;
-            animation: pulse-glow 2s ease-in-out infinite alternate;
         }
         
-        .nav-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #39ff14;
-            box-shadow: 0 0 10px #39ff14;
+        .nav-link {
+            position: relative;
+            color: #4A4A4A;
             transition: all 0.3s ease;
         }
         
-        .nav-dot:hover {
-            transform: scale(1.5);
-            box-shadow: 0 0 15px #39ff14;
+        .nav-link:hover {
+            color: #0066CC;
         }
         
-        .hacker-nav {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1000;
+        .nav-link.active {
+            color: #0066CC;
+            font-weight: 600;
         }
         
-        .hacker-nav a {
-            display: block;
-            margin: 15px 0;
-            text-align: center;
-        }
-        
-        .hacker-nav span {
-            display: block;
-            font-size: 10px;
-            margin-top: 5px;
-            color: #39ff14;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .hacker-nav a:hover span {
-            opacity: 1;
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #0066CC;
         }
         
         .mobile-menu-btn {
             display: none;
         }
         
-        @keyframes scan-line {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100vh); }
-        }
-        
         @media (max-width: 768px) {
-            .hacker-nav {
+            .desktop-nav {
                 display: none;
             }
             
@@ -215,17 +181,17 @@
                 top: 20px;
                 right: 20px;
                 z-index: 1001;
-                background: rgba(0, 17, 0, 0.8);
-                border: 1px solid #39ff14;
-                color: #39ff14;
+                background: white;
+                border: 1px solid #E2E8F0;
+                color: #0066CC;
                 width: 50px;
                 height: 50px;
-                border-radius: 50%;
+                border-radius: 8px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 font-size: 20px;
-                box-shadow: 0 0 10px #39ff14;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             }
             
             .mobile-nav {
@@ -234,7 +200,7 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: rgba(0, 17, 0, 0.95);
+                background: white;
                 z-index: 1000;
                 display: flex;
                 flex-direction: column;
@@ -249,442 +215,532 @@
             }
             
             .mobile-nav a {
-                color: #39ff14;
-                font-size: 24px;
+                color: #1A1A1A;
+                font-size: 20px;
                 margin: 15px 0;
-                text-transform: uppercase;
-                letter-spacing: 2px;
+                font-weight: 500;
             }
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #0066CC 0%, #003366 100%);
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #E6F2FF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0066CC;
+            font-size: 20px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #E6F2FF;
+            color: #0066CC;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .welcome-banner {
+            background: linear-gradient(135deg, #0066CC 0%, #004C99 100%);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            font-weight: 500;
+            animation: pulseSoft 3s infinite;
         }
     </style>
 </head>
-<body class="font-fira bg-terminal-black text-gray-300">
-    <!-- Scan Line -->
-    <div class="scan-line"></div>
-    
-    <!-- Navigation Dots -->
-    <nav class="hacker-nav">
-        <a href="#hero" class="nav-dot active" data-section="hero"><span>ACCUEIL</span></a>
-        <a href="#expertise" class="nav-dot" data-section="expertise"><span>EXPERTISE</span></a>
-        <a href="#experience" class="nav-dot" data-section="experience"><span>EXPÉRIENCE</span></a>
-        <a href="#projects" class="nav-dot" data-section="projects"><span>PROJETS</span></a>
-        <a href="#certifications" class="nav-dot" data-section="certifications"><span>CERTIFICATIONS</span></a>
-        <a href="#contact" class="nav-dot" data-section="contact"><span>CONTACT</span></a>
-    </nav>
-    
-    <!-- Mobile Menu Button -->
-    <button class="mobile-menu-btn" id="mobileMenuBtn">
-        <i class="fas fa-bars"></i>
-    </button>
-    
+<body class="bg-background-light">
+    <!-- Welcome Banner -->
+    <div class="welcome-banner">
+        <p>Bienvenue sur mon portfolio | Welcome to my portfolio</p>
+    </div>
+
+    <!-- Header -->
+    <header class="fixed w-full bg-white shadow-sm z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold text-primary-blue">JIHANE ELMOURABIT</div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav flex space-x-8">
+                <a href="#about" class="nav-link active">À Propos</a>
+                <a href="#expertise" class="nav-link">Expertise</a>
+                <a href="#experience" class="nav-link">Expérience</a>
+                <a href="#projects" class="nav-link">Projets</a>
+                <a href="#education" class="nav-link">Parcours</a>
+                <a href="#certifications" class="nav-link">Certifications</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
     <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobileNav">
-        <a href="#hero" class="neon-hover">Accueil</a>
-        <a href="#expertise" class="neon-hover">Expertise</a>
-        <a href="#experience" class="neon-hover">Expérience</a>
-        <a href="#projects" class="neon-hover">Projets</a>
-        <a href="#certifications" class="neon-hover">Certifications</a>
-        <a href="#contact" class="neon-hover">Contact</a>
-        <button class="mt-8 text-neon-green border border-neon-green px-4 py-2 rounded" id="closeMobileNav">Fermer</button>
+        <a href="#about" class="nav-link">À Propos</a>
+        <a href="#expertise" class="nav-link">Expertise</a>
+        <a href="#experience" class="nav-link">Expérience</a>
+        <a href="#projects" class="nav-link">Projets</a>
+        <a href="#education" class="nav-link">Parcours</a>
+        <a href="#certifications" class="nav-link">Certifications</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <button class="mt-8 text-primary-blue border border-primary-blue px-4 py-2 rounded" id="closeMobileNav">Fermer</button>
     </div>
-    
+
     <!-- Hero Section -->
-    <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden bg-circuit-pattern">
-        <div class="container mx-auto px-4 text-center">
-            <div class="terminal-border rounded-xl p-8 md:p-12 max-w-4xl mx-auto hacker-card">
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-orbitron font-bold text-neon-green neon-text mb-4">
-                    JIHANE ELMOURABIT
-                </h1>
-                <div class="text-xl md:text-2xl font-fira mb-6 flex items-center justify-center">
-                    <span class="text-neon-blue neon-text-blue terminal-typing">Élève Ingénieure en Cybersécurité</span>
-                </div>
-                <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed">
-                    Spécialisée en <span class="text-neon-green">Cyberdéfense et Systèmes de Télécommunications Embarqués</span> à l'ENSA Marrakech.
-                    Passionnée par la <span class="text-neon-blue">gouvernance des risques</span>, la sécurité opérationnelle et l'audit des systèmes d'information.
+    <section id="about" class="pt-24 pb-16 hero-bg text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center animate-fade-in">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Jihane Elmourabit</h1>
+                <div class="text-xl md:text-2xl font-medium mb-8">En recherche de Stage de Fin d’Études (PFE)  6 mois à pqrtir de janvier/février en GRC/SOC/AUDIT IT</div>
+                <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed opacity-90">
+                    Passionnée par la gouvernance des risques, la sécurité opérationnelle et l'audit des systèmes d'information. 
+                    Je recherche un stage de fin d'études de 6 mois à partir de Janvier 2026.
                 </p>
-                <div class="mb-8">
-                    <p class="text-lg text-neon-green font-semibold">Recherche d'un stage de fin d'études (PFE) de 6 mois</p>
-                    <p class="text-md">À partir de Janvier/Février 2026</p>
-                    <p class="text-md mt-2">Domaines : <span class="text-neon-blue">GRC, SOC, Audit IT, Gestion des risques</span></p>
-                </div>
                 <div class="flex flex-wrap justify-center gap-4 mt-8">
-                    <a href="#projects" class="bg-neon-green text-terminal-black px-6 py-3 rounded font-semibold hover:bg-green-400 transition-all duration-300 animate-pulse-glow">
+                    <a href="#projects" class="bg-white text-primary-blue px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-300">
                         <i class="fas fa-code mr-2"></i>Voir mes projets
                     </a>
-                    <a href="#contact" class="border border-neon-green text-neon-green px-6 py-3 rounded hover:bg-neon-green hover:text-terminal-black transition-all duration-300">
+                    <a href="#contact" class="border border-white text-white px-6 py-3 rounded-lg hover:bg-white hover:text-primary-blue transition-all duration-300">
                         <i class="fas fa-envelope mr-2"></i>Me contacter
-                    </a>
-                    <a href="https://www.linkedin.com/in/jihane-elmourabit/" target="_blank" class="border border-neon-blue text-neon-blue px-6 py-3 rounded hover:bg-neon-blue hover:text-terminal-black transition-all duration-300">
-                        <i class="fab fa-linkedin mr-2"></i>LinkedIn
                     </a>
                 </div>
             </div>
-            
-            <!-- Stats Section -->
+        </div>
+    </section>
 
-                   
-                <div class="hacker-card p-4 rounded-lg text-center">
-                    <div class="text-2xl md:text-3xl font-orbitron text-neon-green">10+</div>
-                    <div class="text-sm text-gray-400">Projets techniques</div>
+    <!-- About Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-text-dark section-title">À Propos de Moi</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="text-center">
+                        <div class="text-3xl text-primary-blue mb-2 font-bold">ENSA Marrakech</div>
+                        <div class="text-text-light">École d'Ingénieurs</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl text-primary-blue mb-2 font-bold">Cyberdéfense</div>
+                        <div class="text-text-light">Spécialisation</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl text-primary-blue mb-2 font-bold">Stage PFE 2026</div>
+                        <div class="text-text-light">Recherche active</div>
+                    </div>
                 </div>
-                <div class="hacker-card p-4 rounded-lg text-center">
-                    <div class="text-2xl md:text-3xl font-orbitron text-neon-green">8+</div>
-                    <div class="text-sm text-gray-400">Certifications</div>
+                
+                <div class="card p-8 animate-slide-up">
+                    <h3 class="text-xl font-bold text-text-dark mb-4">Mon Parcours</h3>
+                    <p class="text-text-light mb-4">
+                        Je suis actuellement élève ingénieure en dernière année à l'ENSA Marrakech, spécialisée en Cyberdéfense et Systèmes de Télécommunications Embarqués. 
+                        Mon parcours académique et mes expériences professionnelles m'ont permis de développer une expertise solide en sécurité des systèmes d'information, 
+                        particulièrement en gouvernance des risques et conformité (GRC), sécurité opérationnelle (SOC) et audit IT.
+                    </p>
+                    <p class="text-text-light mb-4">
+                        Passionnée par les défis techniques et organisationnels de la cybersécurité, je m'intéresse particulièrement à la mise en place de cadres de sécurité 
+                        robustes, à l'analyse des risques et à la conception de solutions de sécurité adaptées aux enjeux métier.
+                    </p>
+                    <p class="text-text-light">
+                        Au-delà de mes compétences techniques, j'ai développé un fort leadership à travers mes engagements associatifs, notamment en tant que cheffe de cellule CTF 
+                        au club HackTrack de l'ENSA Marrakech et en tant que mentor dans le programme DigiGirlz Morocco.
+                    </p>
                 </div>
-                <div class="hacker-card p-4 rounded-lg text-center">
-                    <div class="text-2xl md:text-3xl font-orbitron text-neon-green">3</div>
-                    <div class="text-sm text-gray-400">Rôles de leadership</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-16 bg-background-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-text-dark section-title text-center">Parcours Scolaire</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-8">
+                    <!-- ENSA MARRAKECH -->
+                    <div class="card p-6 timeline-item">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                            <h3 class="text-xl font-bold text-text-dark">École Nationale des Sciences Appliquées Marrakech (ENSA)</h3>
+                            <span class="text-primary-blue font-semibold mt-2 md:mt-0 bg-light-blue px-3 py-1 rounded">2022 - 2026</span>
+                        </div>
+                        <p class="text-lg font-semibold mb-4 text-primary-blue">Marrakech, Maroc</p>
+                        <p class="text-text-light mb-4">Diplôme d'Ingénieur en Cyberdéfense et Systèmes de Télécommunications Embarqués</p>
+                        <ul class="space-y-3 text-text-light">
+                            <li class="flex items-start">
+                                <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                                <span>Spécialisation en cybersécurité, gouvernance des risques et conformité (GRC)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                                <span>Formation en sécurité opérationnelle (SOC), audit IT et tests d'intrusion</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                                <span>Projets pratiques en gestion des risques, conformité réglementaire et sécurité des systèmes</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- CPGE -->
+                    <div class="card p-6 timeline-item">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                            <h3 class="text-xl font-bold text-text-dark">Classe Préparatoire aux Grandes Écoles (CPGE)</h3>
+                            <span class="text-primary-blue font-semibold mt-2 md:mt-0 bg-light-blue px-3 py-1 rounded">2020 - 2022</span>
+                        </div>
+                        <p class="text-lg font-semibold mb-4 text-primary-blue">CPGE Errazi, El Jadida, Maroc</p>
+                        <p class="text-text-light mb-4">Formation intensive en mathématiques, physique et sciences de l'ingénieur</p>
+                        <ul class="space-y-3 text-text-light">
+                            <li class="flex items-start">
+                                <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                                <span>Préparation aux concours d'entrée des grandes écoles d'ingénieurs</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                                <span>Développement de compétences en analyse, résolution de problèmes et travail en équipe</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Leadership & Engagement -->
+                <h2 class="text-3xl font-bold text-text-dark section-title mt-16">ENGAGEMENTS & LEADERSHIP</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold text-text-dark mb-3">Cheffe de Cellule CTF</h3>
+                        <p class="text-primary-blue font-semibold mb-2">Club HackTrack ENSA Marrakech · Sep 2024 - Juin 2025</p>
+                        <ul class="space-y-2 text-text-light text-sm">
+                            <li class="flex items-start">
+                                <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                                <span>Pilotage de la cellule compétitions du club de cybersécurité</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                                <span>Organisation et animation de bootcamps réunissant plus de 100 participants</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                                <span>Encadrement et formation d'étudiants, création de challenges techniques</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                                <span>Compétences développées : Leadership, Team management, Challenge design, Project coordination</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold text-text-dark mb-3">Mentor DigiGirlz</h3>
+                        <p class="text-primary-blue font-semibold mb-2">Programme DigiGirlz Morocco · Sep 2024 - Juin 2025</p>
+                        <ul class="space-y-2 text-text-light text-sm">
+                            <li class="flex items-start">
+                                <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                                <span>Encadrement de lycéennes pour promouvoir les STEM et la cybersécurité</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                                <span>Animation d'ateliers pédagogiques et initiation à la sécurité numérique</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold text-text-dark mb-3">Vice-présidente</h3>
+                        <p class="text-primary-blue font-semibold mb-2">Club GCDSTE · Sep 2023 - Juin 2024</p>
+                        <ul class="space-y-2 text-text-light text-sm">
+                            <li class="flex items-start">
+                                <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                                <span>Coordination d'événements académiques autour de l'IA et de la cybersécurité</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                                <span>Gestion de partenariats internationaux et communication institutionnelle</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Expertise Section -->
-    <section id="expertise" class="py-20 px-4 bg-terminal-black">
-        <div class="container mx-auto max-w-6xl">
-            <h2 class="text-3xl md:text-4xl font-orbitron text-neon-green section-title mb-12">Domaines d'Expertise</h2>
+    <section id="expertise" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-text-dark section-title text-center">Domaines d'Expertise</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                <div class="hacker-card rounded-xl p-6 text-center">
-                    <div class="text-3xl text-neon-blue mb-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="card p-6 text-center animate-slide-up">
+                    <div class="text-3xl text-primary-blue mb-4">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3 class="text-xl font-orbitron text-neon-blue mb-2">SOC & Sécurité Opérationnelle</h3>
-                    <p class="text-gray-300 text-sm">Déploiement et gestion de SOC, analyse d'incidents, corrélation d'alertes</p>
+                    <h3 class="text-xl font-bold text-text-dark mb-3">Sécurité Opérationnelle</h3>
+                    <p class="text-text-light">
+                        Déploiement et gestion de SOC, analyse d'incidents, corrélation d'alertes, tests de résilience
+                    </p>
                 </div>
                 
-                <div class="hacker-card rounded-xl p-6 text-center">
-                    <div class="text-3xl text-neon-green mb-4">
+                <div class="card p-6 text-center animate-slide-up">
+                    <div class="text-3xl text-primary-blue mb-4">
                         <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3 class="text-xl font-orbitron text-neon-green mb-2">GRC & Conformité</h3>
-                    <p class="text-gray-300 text-sm">Gestion des risques, conformité réglementaire, élaboration de politiques de sécurité</p>
+                    <h3 class="text-xl font-bold text-text-dark mb-3">GRC & Conformité</h3>
+                    <p class="text-text-light">
+                        Gestion des risques, conformité réglementaire, élaboration de politiques de sécurité, analyse de risques
+                    </p>
                 </div>
                 
-                <div class="hacker-card rounded-xl p-6 text-center">
-                    <div class="text-3xl text-neon-purple mb-4">
+                <div class="card p-6 text-center animate-slide-up">
+                    <div class="text-3xl text-primary-blue mb-4">
                         <i class="fas fa-search"></i>
                     </div>
-                    <h3 class="text-xl font-orbitron text-neon-purple mb-2">Audit & Tests d'Intrusion</h3>
-                    <p class="text-gray-300 text-sm">Évaluation de sécurité, tests d'intrusion, analyse de vulnérabilités</p>
-                </div>
-                
-                <div class="hacker-card rounded-xl p-6 text-center">
-                    <div class="text-3xl text-neon-pink mb-4">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 class="text-xl font-orbitron text-neon-pink mb-2">Leadership & Management</h3>
-                    <p class="text-gray-300 text-sm">Encadrement d'équipes, organisation d'événements, mentorat</p>
+                    <h3 class="text-xl font-bold text-text-dark mb-3">Audit & Tests d'Intrusion</h3>
+                    <p class="text-text-light">
+                        Évaluation de sécurité, tests d'intrusion, analyse de vulnérabilités, recommandations de durcissement
+                    </p>
                 </div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Compétences Techniques -->
-                <div class="hacker-card rounded-xl p-6">
-                    <h3 class="text-xl font-orbitron text-neon-blue mb-4 flex items-center">
-                        <i class="fas fa-terminal mr-2"></i> Compétences Techniques
-                    </h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center">
-                            <span class="text-neon-green mr-2"><i class="fas fa-caret-right"></i></span>
-                            <span>Déploiement SOC (Wazuh/ELK, TheHive, Shuffle)</span>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-neon-green mr-2"><i class="fas fa-caret-right"></i></span>
-                            <span>Tests d'intrusion & Éthical Hacking</span>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-neon-green mr-2"><i class="fas fa-caret-right"></i></span>
-                            <span>Analyse de vulnérabilités & Forensic</span>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-neon-green mr-2"><i class="fas fa-caret-right"></i></span>
-                            <span>Active Directory Security</span>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-neon-green mr-2"><i class="fas fa-caret-right"></i></span>
-                            <span>DevSecOps (Docker, Kubernetes, CI/CD)</span>
-                        </li>
-                    </ul>
-                </div>
+            <!-- Skills -->
+            <div class="max-w-4xl mx-auto mt-16">
+                <h3 class="text-2xl font-bold text-text-dark mb-8 text-center">Compétences Techniques</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="card p-6">
+                        <h4 class="text-lg font-bold text-text-dark mb-4 flex items-center">
+                            <i class="fas fa-terminal text-primary-blue mr-2"></i> Outils & Technologies
+                        </h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-center justify-between">
+                                <span>Wazuh, ELK, Splunk</span>
+                                <div class="skill-bar w-32">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span>Python, Bash, PowerShell</span>
+                                <div class="skill-bar w-32">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span>Docker, Kubernetes, AWS</span>
+                                <div class="skill-bar w-32">
+                                    <div class="skill-progress" style="width: 75%"></div>
+                                </div>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span>Metasploit, Burp Suite</span>
+                                <div class="skill-bar w-32">
+                                    <div class="skill-progress" style="width: 70%"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
 
-                <!-- Normes & Méthodologies -->
-                <div class="hacker-card rounded-xl p-6">
-                    <h3 class="text-xl font-orbitron text-neon-green mb-4 flex items-center">
-                        <i class="fas fa-file-contract mr-2"></i> Normes & Méthodologies
-                    </h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center">
-                            <span class="text-neon-green mr-2"><i class="fas fa-caret-right"></i></span>
-                            <span>ISO/IEC 27001, 27002, 27005</span>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-neon-green mr-2"><i class="fas fa-caret-right"></i></span>
-                            <span>EBIOS Risk Manager</span>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-neon-green mr-2"><i class="fas fa-caret-right"></i></span>
-                            <span>NIST Cybersecurity Framework</span>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-neon-green mr-2"><i class="fas fa-caret-right"></i></span>
-                            <span>MEHARI, OCTAVE</span>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-neon-green mr-2"><i class="fas fa-caret-right"></i></span>
-                            <span>PCI DSS, RGPD, Loi 08-09</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Outils & Technologies -->
-                <div class="hacker-card rounded-xl p-6">
-                    <h3 class="text-xl font-orbitron text-neon-purple mb-4 flex items-center">
-                        <i class="fas fa-tools mr-2"></i> Outils & Technologies
-                    </h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center">
-                            <span class="text-neon-green mr-2"><i class="fas fa-caret-right"></i></span>
-                            <span>Wazuh, ELK, Splunk, Azure Sentinel</span>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-neon-green mr-2"><i class="fas fa-caret-right"></i></span>
-                            <span>Metasploit, Burp Suite, Nmap</span>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-neon-green mr-2"><i class="fas fa-caret-right"></i></span>
-                            <span>Python, Bash, PowerShell</span>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-neon-green mr-2"><i class="fas fa-caret-right"></i></span>
-                            <span>Docker, Kubernetes, AWS</span>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-neon-green mr-2"><i class="fas fa-caret-right"></i></span>
-                            <span>Windows Server, Linux, VMware</span>
-                        </li>
-                    </ul>
+                    <div class="card p-6">
+                        <h4 class="text-lg font-bold text-text-dark mb-4 flex items-center">
+                            <i class="fas fa-file-contract text-primary-blue mr-2"></i> Normes & Méthodologies
+                        </h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-center justify-between">
+                                <span>ISO/IEC 27001, 27002</span>
+                                <div class="skill-bar w-32">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span>EBIOS Risk Manager</span>
+                                <div class="skill-bar w-32">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span>NIST Cybersecurity Framework</span>
+                                <div class="skill-bar w-32">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span>MEHARI, OCTAVE</span>
+                                <div class="skill-bar w-32">
+                                    <div class="skill-progress" style="width: 75%"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="py-20 px-4 bg-circuit-pattern">
-        <div class="container mx-auto max-w-4xl">
-            <h2 class="text-3xl md:text-4xl font-orbitron text-neon-green section-title mb-12">Expérience Professionnelle</h2>
+    <section id="experience" class="py-16 bg-background-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-text-dark section-title">Expérience Professionnelle</h2>
             
-            <div class="space-y-8">
-                <!-- SOCVISION -->
-                <div class="hacker-card rounded-xl p-6 relative">
-                    <div class="absolute -left-3 top-6 w-6 h-6 rounded-full bg-neon-green"></div>
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
-                        <h3 class="text-xl font-orbitron text-neon-blue">Stagiaire Analyste SOC</h3>
-                        <span class="text-neon-green font-semibold mt-2 md:mt-0 bg-hacker-dark px-3 py-1 rounded">Juin 2025 - Sept 2025</span>
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-8">
+                    <!-- SOCVISION -->
+                    <div class="card p-6 timeline-item">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                            <h3 class="text-xl font-bold text-text-dark">Stagiaire Analyste SOC</h3>
+                            <span class="text-primary-blue font-semibold mt-2 md:mt-0 bg-light-blue px-3 py-1 rounded">Juin 2025 - Sept 2025</span>
+                        </div>
+                        <p class="text-lg font-semibold mb-4 text-primary-blue">SOCVISION · Casablanca, Maroc</p>
+                        <ul class="space-y-3 text-text-light">
+                            <li class="flex items-start">
+                                <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                                <span>Conception et déploiement d'un SOC Cloud automatisé intégrant Wazuh/ELK, SOAR Shuffle et TheHive</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                                <span>Automatisation de l'enrichissement des alertes via VirusTotal, Gmail et Telegram</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                                <span>Simulation d'attaques réelles pour tester la résilience du SOC selon les standards ISO 27001, NIST et CIS</span>
+                            </li>
+                        </ul>
                     </div>
-                    <p class="text-lg font-semibold mb-4 text-neon-green">SOCVISION · Casablanca, Maroc</p>
-                    <ul class="space-y-3 text-gray-300">
-                        <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
-                            <span>Conception et déploiement d'un SOC Cloud automatisé intégrant Wazuh/ELK, SOAR Shuffle et TheHive</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
-                            <span>Automatisation de l'enrichissement des alertes via VirusTotal, Gmail et Telegram</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
-                            <span>Simulation d'attaques réelles pour tester la résilience du SOC selon les standards ISO 27001, NIST et CIS</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
-                            <span>Corrélation d'alertes et gestion des incidents de sécurité</span>
-                        </li>
-                    </ul>
-                </div>
 
-                <!-- ENSA MARRAKECH -->
-                <div class="hacker-card rounded-xl p-6 relative">
-                    <div class="absolute -left-3 top-6 w-6 h-6 rounded-full bg-neon-green"></div>
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
-                        <h3 class="text-xl font-orbitron text-neon-blue">Stagiaire Consultant GRC</h3>
-                        <span class="text-neon-green font-semibold mt-2 md:mt-0 bg-hacker-dark px-3 py-1 rounded">Juin 2024 - Août 2024</span>
+                    <!-- ENSA MARRAKECH -->
+                    <div class="card p-6 timeline-item">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                            <h3 class="text-xl font-bold text-text-dark">Stagiaire Consultant GRC</h3>
+                            <span class="text-primary-blue font-semibold mt-2 md:mt-0 bg-light-blue px-3 py-1 rounded">Juin 2024 - Août 2024</span>
+                        </div>
+                        <p class="text-lg font-semibold mb-4 text-primary-blue">ENSA MARRAKECH · Marrakech, Maroc</p>
+                        <ul class="space-y-3 text-text-light">
+                            <li class="flex items-start">
+                                <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                                <span>Proposition et élaboration d'un plan de sécurité de l'information conforme à ISO/IEC 27001:2022</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                                <span>Analyse et gestion des risques selon ISO 27002 et NIST SP 800-30, avec cartographie et priorisation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                                <span>Rédaction de la documentation du SMSI : politiques, procédures, registre des risques et plans de continuité</span>
+                            </li>
+                        </ul>
                     </div>
-                    <p class="text-lg font-semibold mb-4 text-neon-green">ENSA MARRAKECH · Marrakech, Maroc</p>
-                    <ul class="space-y-3 text-gray-300">
-                        <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
-                            <span>Proposition et élaboration d'un plan de sécurité de l'information conforme à ISO/IEC 27001:2022</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
-                            <span>Analyse et gestion des risques selon ISO 27002 et NIST SP 800-30, avec cartographie et priorisation</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
-                            <span>Rédaction de la documentation du SMSI : politiques, procédures, registre des risques et plans de continuité</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
-                            <span>Coordination avec les parties prenantes et recommandations pour renforcer la sécurité</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Leadership & Engagement -->
-            <h2 class="text-3xl md:text-4xl font-orbitron text-neon-green section-title mt-16 mb-8">Leadership & Engagement</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="hacker-card rounded-xl p-6">
-                    <h3 class="text-xl font-orbitron text-neon-blue mb-3">Cheffe de Cellule CTF</h3>
-                    <p class="text-neon-green font-semibold mb-2">Club HackTrack ENSA Marrakech · Sep 2024 - Juin 2025</p>
-                    <ul class="space-y-2 text-gray-300 text-sm">
-                        <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
-                            <span>Pilotage de la cellule compétitions du club de cybersécurité</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
-                            <span>Organisation et animation de bootcamps réunissant plus de 100 participants</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
-                            <span>Encadrement et formation d'étudiants, création de challenges techniques (forensics, réseau)</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="hacker-card rounded-xl p-6">
-                    <h3 class="text-xl font-orbitron text-neon-blue mb-3">Mentor DigiGirlz</h3>
-                    <p class="text-neon-green font-semibold mb-2">Programme DigiGirlz Morocco · Sep 2024 - Juin 2025</p>
-                    <ul class="space-y-2 text-gray-300 text-sm">
-                        <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
-                            <span>Encadrement de lycéennes pour promouvoir les STEM et la cybersécurité</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
-                            <span>Animation d'ateliers pédagogiques et initiation à la sécurité numérique</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="hacker-card rounded-xl p-6">
-                    <h3 class="text-xl font-orbitron text-neon-blue mb-3">Vice-Présidente</h3>
-                    <p class="text-neon-green font-semibold mb-2">Club GCDSTE · Sep 2023 - Juin 2024</p>
-                    <ul class="space-y-2 text-gray-300 text-sm">
-                        <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
-                            <span>Coordination d'événements académiques autour de l'IA et de la cybersécurité</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
-                            <span>Gestion de partenariats internationaux et communication institutionnelle</span>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20 px-4 bg-terminal-black">
-        <div class="container mx-auto max-w-6xl">
-            <h2 class="text-3xl md:text-4xl font-orbitron text-neon-green section-title mb-12">Projets Techniques</h2>
+    <section id="projects" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-text-dark section-title text-center">Projets Techniques</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
                 <!-- UniSecOps -->
-                <div class="hacker-card rounded-xl p-6">
+                <div class="card p-6">
                     <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-xl font-orbitron text-neon-blue">UniSecOps</h3>
-                        <span class="text-neon-green text-sm bg-hacker-dark px-2 py-1 rounded">Oct 2025 - Nov 2025</span>
+                        <h3 class="text-xl font-bold text-text-dark">UniSecOps</h3>
+                        <span class="text-primary-blue text-sm bg-light-blue px-2 py-1 rounded">Oct 2025 - Nov 2025</span>
                     </div>
-                    <p class="text-gray-300 mb-4">Développement d'une plateforme intégrée pour la gestion de la conformité réglementaire (PCI DSS, PCI SSF, NIST, ANSSI) et l'analyse de risque selon les méthodologies EBIOS RM, MEHARI, OCTAVE et NIST RMF.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs bg-neon-green text-terminal-black px-2 py-1 rounded">EBIOS RM</span>
-                        <span class="text-xs bg-neon-blue text-terminal-black px-2 py-1 rounded">Conformité</span>
-                        <span class="text-xs bg-neon-purple text-terminal-black px-2 py-1 rounded">Gestion des risques</span>
+                    <p class="text-text-light mb-4">Plateforme intégrée pour la gestion de la conformité réglementaire (PCI DSS, PCI SSF, NIST, ANSSI) et l'analyse de risque selon EBIOS RM, MEHARI, OCTAVE et NIST RMF.</p>
+                    <div class="mb-4">
+                        <span class="tag">EBIOS RM</span>
+                        <span class="tag">Conformité</span>
+                        <span class="tag">Gestion des risques</span>
                     </div>
-                    <ul class="space-y-2 text-gray-300 text-sm">
+                    <ul class="space-y-2 text-text-light text-sm">
                         <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                            <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
                             <span>Implémentation d'un modèle Zero Trust avec MFA et vérification continue</span>
                         </li>
                         <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                            <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
                             <span>Développement d'une plateforme DevSecOps universitaire</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- AD Security Assessment -->
-                <div class="hacker-card rounded-xl p-6">
+                <div class="card p-6">
                     <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-xl font-orbitron text-neon-blue">Évaluation de Sécurité Active Directory</h3>
-                        <span class="text-neon-green text-sm bg-hacker-dark px-2 py-1 rounded">Sep 2025 - Nov 2025</span>
+                        <h3 class="text-xl font-bold text-text-dark">Évaluation de Sécurité AD</h3>
+                        <span class="text-primary-blue text-sm bg-light-blue px-2 py-1 rounded">Sep 2025 - Nov 2025</span>
                     </div>
-                    <p class="text-gray-300 mb-4">Conception d'un lab Active Directory vulnérable et exécution de techniques d'attaque (BloodHound, Kerberoasting, Pass-the-Hash, Overpass-the-Hash).</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs bg-neon-green text-terminal-black px-2 py-1 rounded">Active Directory</span>
-                        <span class="text-xs bg-neon-blue text-terminal-black px-2 py-1 rounded">BloodHound</span>
-                        <span class="text-xs bg-neon-purple text-terminal-black px-2 py-1 rounded">Tests d'intrusion</span>
+                    <p class="text-text-light mb-4">Conception d'un lab Active Directory vulnérable et exécution de techniques d'attaque (BloodHound, Kerberoasting, Pass-the-Hash).</p>
+                    <div class="mb-4">
+                        <span class="tag">Active Directory</span>
+                        <span class="tag">BloodHound</span>
+                        <span class="tag">Tests d'intrusion</span>
                     </div>
-                    <ul class="space-y-2 text-gray-300 text-sm">
+                    <ul class="space-y-2 text-text-light text-sm">
                         <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                            <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
                             <span>Rédaction de recommandations de durcissement</span>
                         </li>
                         <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                            <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
                             <span>Élaboration du PCA/PRA et du plan de réponse aux incidents AD</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- IntelligentSIEM -->
-                <div class="hacker-card rounded-xl p-6">
+                <div class="card p-6">
                     <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-xl font-orbitron text-neon-blue">IntelligentSIEM</h3>
-                        <span class="text-neon-green text-sm bg-hacker-dark px-2 py-1 rounded">Jan 2025 - Avr 2025</span>
+                        <h3 class="text-xl font-bold text-text-dark">IntelligentSIEM</h3>
+                        <span class="text-primary-blue text-sm bg-light-blue px-2 py-1 rounded">Jan 2025 - Avr 2025</span>
                     </div>
-                    <p class="text-gray-300 mb-4">Développement d'un SOC Cloud intelligent (Azure Sentinel, Grafana) intégrant un chatbot IA pour l'analyse des incidents et la génération automatique de rapports.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs bg-neon-green text-terminal-black px-2 py-1 rounded">Azure Sentinel</span>
-                        <span class="text-xs bg-neon-blue text-terminal-black px-2 py-1 rounded">IA</span>
-                        <span class="text-xs bg-neon-purple text-terminal-black px-2 py-1 rounded">Grafana</span>
+                    <p class="text-text-light mb-4">Développement d'un SOC Cloud intelligent (Azure Sentinel, Grafana) intégrant un chatbot IA pour l'analyse des incidents.</p>
+                    <div class="mb-4">
+                        <span class="tag">Azure Sentinel</span>
+                        <span class="tag">IA</span>
+                        <span class="tag">Grafana</span>
                     </div>
-                    <ul class="space-y-2 text-gray-300 text-sm">
+                    <ul class="space-y-2 text-text-light text-sm">
                         <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                            <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
                             <span>Intégration d'un chatbot IA pour l'analyse des incidents</span>
                         </li>
                         <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                            <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
                             <span>Génération automatique de rapports de sécurité</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Information Security Management Plan -->
-                <div class="hacker-card rounded-xl p-6">
+                <div class="card p-6">
                     <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-xl font-orbitron text-neon-blue">Plan de Management de la Sécurité</h3>
-                        <span class="text-neon-green text-sm bg-hacker-dark px-2 py-1 rounded">Jan 2025 - Mai 2025</span>
+                        <h3 class="text-xl font-bold text-text-dark">Plan de Management de la Sécurité</h3>
+                        <span class="text-primary-blue text-sm bg-light-blue px-2 py-1 rounded">Jan 2025 - Mai 2025</span>
                     </div>
-                    <p class="text-gray-300 mb-4">Développement d'un plan de sécurité de l'information conforme à ISO/IEC 27001:2022, incluant la gestion des risques et la documentation complète du SMSI.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs bg-neon-green text-terminal-black px-2 py-1 rounded">ISO 27001</span>
-                        <span class="text-xs bg-neon-blue text-terminal-black px-2 py-1 rounded">Gestion des risques</span>
-                        <span class="text-xs bg-neon-purple text-terminal-black px-2 py-1 rounded">SMSI</span>
+                    <p class="text-text-light mb-4">Développement d'un plan de sécurité de l'information conforme à ISO/IEC 27001:2022, incluant la gestion des risques.</p>
+                    <div class="mb-4">
+                        <span class="tag">ISO 27001</span>
+                        <span class="tag">Gestion des risques</span>
+                        <span class="tag">SMSI</span>
                     </div>
-                    <ul class="space-y-2 text-gray-300 text-sm">
+                    <ul class="space-y-2 text-text-light text-sm">
                         <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                            <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
                             <span>Analyse et gestion des risques selon ISO 27002 et NIST SP 800-30</span>
                         </li>
                         <li class="flex items-start">
-                            <span class="text-neon-green mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
+                            <span class="text-primary-blue mr-2 mt-1"><i class="fas fa-caret-right"></i></span>
                             <span>Rédaction de politiques, procédures, registre des risques et plans de continuité</span>
                         </li>
                     </ul>
@@ -694,131 +750,120 @@
     </section>
 
     <!-- Certifications Section -->
-    <section id="certifications" class="py-20 px-4 bg-circuit-pattern">
-        <div class="container mx-auto max-w-4xl">
-            <h2 class="text-3xl md:text-4xl font-orbitron text-neon-green section-title mb-12">Certifications</h2>
+    <section id="certifications" class="py-16 bg-background-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-text-dark section-title text-center">Certifications</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="hacker-card rounded-xl p-6 flex items-start">
-                    <div class="text-neon-green text-2xl mr-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <div class="card p-6 text-center">
+                    <div class="text-3xl text-primary-blue mb-4">
                         <i class="fas fa-award"></i>
                     </div>
-                    <div>
-                        <h3 class="text-lg font-orbitron text-neon-blue">EBIOS Risk Manager</h3>
-                        <p class="text-gray-400">MOOC ANSSI & Club EBIOS</p>
-                    </div>
+                    <h3 class="text-lg font-bold text-text-dark">EBIOS Risk Manager</h3>
+                    <p class="text-text-light">ANSSI & Club EBIOS</p>
                 </div>
-                <div class="hacker-card rounded-xl p-6 flex items-start">
-                    <div class="text-neon-green text-2xl mr-4">
+                <div class="card p-6 text-center">
+                    <div class="text-3xl text-primary-blue mb-4">
                         <i class="fas fa-award"></i>
                     </div>
-                    <div>
-                        <h3 class="text-lg font-orbitron text-neon-blue">ISO/IEC 27001 Information Security Associate</h3>
-                        <p class="text-gray-400">SkillsFront</p>
-                    </div>
+                    <h3 class="text-lg font-bold text-text-dark">ISO/IEC 27001</h3>
+                    <p class="text-text-light">Information Security Associate</p>
                 </div>
-                <div class="hacker-card rounded-xl p-6 flex items-start">
-                    <div class="text-neon-green text-2xl mr-4">
+                <div class="card p-6 text-center">
+                    <div class="text-3xl text-primary-blue mb-4">
                         <i class="fas fa-award"></i>
                     </div>
-                    <div>
-                        <h3 class="text-lg font-orbitron text-neon-blue">NIST Cybersecurity Framework</h3>
-                        <p class="text-gray-400">IBM</p>
-                    </div>
+                    <h3 class="text-lg font-bold text-text-dark">NIST CSF</h3>
+                    <p class="text-text-light">Cybersecurity Framework</p>
                 </div>
-                <div class="hacker-card rounded-xl p-6 flex items-start">
-                    <div class="text-neon-green text-2xl mr-4">
+                <div class="card p-6 text-center">
+                    <div class="text-3xl text-primary-blue mb-4">
                         <i class="fas fa-award"></i>
                     </div>
-                    <div>
-                        <h3 class="text-lg font-orbitron text-neon-blue">GRC Foundations in Cybersecurity</h3>
-                        <p class="text-gray-400">SIMPLYCYBER ACADEMY</p>
-                    </div>
+                    <h3 class="text-lg font-bold text-text-dark">GRC Foundations</h3>
+                    <p class="text-text-light">SIMPLYCYBER ACADEMY</p>
                 </div>
-                <div class="hacker-card rounded-xl p-6 flex items-start">
-                    <div class="text-neon-green text-2xl mr-4">
+                <div class="card p-6 text-center">
+                    <div class="text-3xl text-primary-blue mb-4">
                         <i class="fas fa-award"></i>
                     </div>
-                    <div>
-                        <h3 class="text-lg font-orbitron text-neon-blue">GRC Analyst Master Class</h3>
-                        <p class="text-gray-400">TCM Security</p>
-                    </div>
+                    <h3 class="text-lg font-bold text-text-dark">GRC Analyst</h3>
+                    <p class="text-text-light">TCM Security</p>
                 </div>
-                <div class="hacker-card rounded-xl p-6 flex items-start">
-                    <div class="text-neon-green text-2xl mr-4">
+                <div class="card p-6 text-center">
+                    <div class="text-3xl text-primary-blue mb-4">
                         <i class="fas fa-award"></i>
                     </div>
-                    <div>
-                        <h3 class="text-lg font-orbitron text-neon-blue">CAPT - Certified Associate Penetration Tester</h3>
-                        <p class="text-gray-400">Hackviser (en cours)</p>
-                    </div>
+                    <h3 class="text-lg font-bold text-text-dark">CAPT</h3>
+                    <p class="text-text-light">Certified Associate Penetration Tester</p>
                 </div>
-                <div class="hacker-card rounded-xl p-6 flex items-start">
-                    <div class="text-neon-green text-2xl mr-4">
+                <div class="card p-6 text-center">
+                    <div class="text-3xl text-primary-blue mb-4">
                         <i class="fas fa-award"></i>
                     </div>
-                    <div>
-                        <h3 class="text-lg font-orbitron text-neon-blue">AWS Cloud Practitioner Essentials</h3>
-                        <p class="text-gray-400">Amazon Web Services</p>
-                    </div>
+                    <h3 class="text-lg font-bold text-text-dark">AWS Cloud</h3>
+                    <p class="text-text-light">Cloud Practitioner</p>
                 </div>
-                <div class="hacker-card rounded-xl p-6 flex items-start">
-                    <div class="text-neon-green text-2xl mr-4">
+                <div class="card p-6 text-center">
+                    <div class="text-3xl text-primary-blue mb-4">
                         <i class="fas fa-award"></i>
                     </div>
-                    <div>
-                        <h3 class="text-lg font-orbitron text-neon-blue">Huawei HCIA-AI</h3>
-                        <p class="text-gray-400">Huawei Certified ICT Associate - AI</p>
-                    </div>
+                    <h3 class="text-lg font-bold text-text-dark">Scrum Master I</h3>
+                    <p class="text-text-light"> (PSM I) Practice Assessment</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 px-4 bg-terminal-black">
-        <div class="container mx-auto max-w-4xl text-center">
-            <h2 class="text-3xl md:text-4xl font-orbitron text-neon-green section-title mb-12">Contact</h2>
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-text-dark section-title text-center">Contact</h2>
             
-            <div class="hacker-card rounded-xl p-8 max-w-2xl mx-auto">
-                <p class="text-xl mb-6">Recherche active d'un stage de fin d'études de 6 mois à partir de Janvier/Février 2026</p>
-                <p class="text-lg mb-8 text-neon-blue">Domaines : GRC, SOC, Audit IT, Gestion des risques</p>
-                
-                <div class="space-y-4 text-lg mb-8">
-                    <div class="flex items-center justify-center">
-                        <span class="text-neon-green mr-3 text-xl"><i class="fas fa-envelope"></i></span>
-                        <a href="mailto:jihaneelmourabit@gmail.com" class="neon-hover transition-all duration-300">jihaneelmourabit@gmail.com</a>
+            <div class="max-w-2xl mx-auto">
+                <div class="card p-8 text-center">
+                    <p class="text-xl mb-6">Recherche active d'un stage de fin d'études de 6 mois à partir de Janvier/Février 2026</p>
+                    <p class="text-lg mb-8 text-primary-blue font-semibold">Domaines : GRC, SOC, Audit IT, Gestion des risques</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="flex flex-col items-center">
+                            <div class="contact-icon mb-3">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <a href="mailto:jihaneelmourabit@gmail.com" class="text-text-dark font-medium">jihaneelmourabit@gmail.com</a>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="contact-icon mb-3">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <a href="tel:+212674248022" class="text-text-dark font-medium">+212 6 74 24 80 22</a>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="contact-icon mb-3">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <span class="text-text-dark font-medium">Marrakech, Maroc</span>
+                        </div>
                     </div>
-                    <div class="flex items-center justify-center">
-                        <span class="text-neon-green mr-3 text-xl"><i class="fas fa-phone"></i></span>
-                        <a href="tel:+212674248022" class="neon-hover transition-all duration-300">+212 6 74 24 80 22</a>
+                    
+                    <div class="flex justify-center space-x-6 mt-4">
+                        <a href="https://github.com/Fri3r3en" target="_blank" class="text-2xl text-primary-blue hover:text-secondary-blue transition-colors" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/jihane-elmourabit/" target="_blank" class="text-2xl text-primary-blue hover:text-secondary-blue transition-colors" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
                     </div>
-                    <div class="flex items-center justify-center">
-                        <span class="text-neon-green mr-3 text-xl"><i class="fas fa-map-marker-alt"></i></span>
-                        <span>Marrakech, Maroc</span>
-                    </div>
-                </div>
-                
-                <div class="flex justify-center space-x-6 mt-8">
-                    <a href="https://github.com/Fri3r3en" target="_blank" class="text-3xl neon-hover transition-all duration-300" aria-label="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/jihane-elmourabit/" target="_blank" class="text-3xl neon-hover transition-all duration-300" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="#contact" class="text-3xl neon-hover transition-all duration-300" aria-label="Email">
-                        <i class="fas fa-envelope"></i>
-                    </a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 px-4 border-t border-terminal-gray bg-terminal-black">
+    <footer class="py-8 bg-dark-blue text-white">
         <div class="container mx-auto text-center">
-            <p class="text-gray-400">&copy; 2025 JIHANE ELMOURABIT. Tous droits réservés.</p>
-            <p class="text-gray-500 text-sm mt-2">Élève Ingénieure en Cybersécurité | Recherche de Stage PFE 2026</p>
+            <p>&copy; 2025 JIHANE ELMOURABIT. Tous droits réservés.</p>
+            <p class="text-sm mt-2 opacity-80">Élève Ingénieure en Cybersécurité | Recherche de Stage PFE 2026</p>
         </div>
     </footer>
 
@@ -827,21 +872,21 @@
         // Navigation active state
         function updateActiveNav() {
             const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-dot');
+            const navLinks = document.querySelectorAll('.nav-link');
             
             let currentSection = '';
             
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
+                if (scrollY >= (sectionTop - 100)) {
                     currentSection = section.getAttribute('id');
                 }
             });
             
             navLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('data-section') === currentSection) {
+                if (link.getAttribute('href') === `#${currentSection}`) {
                     link.classList.add('active');
                 }
             });
@@ -865,10 +910,6 @@
             mobileNav.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     mobileNav.classList.remove('active');
-                updateActiveNav();
-                setTimeout(() => {
-                    mobileNav.classList.remove('active');
-                }, 500);
                 });
             });
         }
